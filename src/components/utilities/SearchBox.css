@@ -1,0 +1,40 @@
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (min-width: 220.98px) and (max-device-width: 767.97px) {
+}
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 767.98px) and (max-device-width: 991.97px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media only screen and (min-width: 991.98px) and (max-device-width: 1199.97px) {
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1199.98px) and (max-device-width: 1399.97px) {
+  .search-box {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .search-text {
+    outline: 0;
+    height: 42px;
+    width: 244px;
+    line-height: 42px;
+    padding: 0 16px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #212121;
+    border: 0;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+  }
+  .search-text:focus {
+    outline: 0;
+    background-color: #222831;
+    font-weight: 600;
+    color: #dddddd;
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1399.98px) {
+}

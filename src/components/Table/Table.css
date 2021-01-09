@@ -1,0 +1,23 @@
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (min-width: 220.98px) and (max-device-width: 767.97px) {
+}
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 767.98px) and (max-device-width: 991.97px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media only screen and (min-width: 991.98px) and (max-device-width: 1199.97px) {
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1199.98px) and (max-device-width: 1399.97px) {
+  .result-table {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    background-color: #ffc1b6;
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1399.98px) {
+}

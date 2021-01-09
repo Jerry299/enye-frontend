@@ -39,7 +39,8 @@
     background-color: rgba(255, 255, 255, 0.23);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    height: 85vh;
+
+    max-height: 100%;
     width: 90vw;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 4px;
@@ -49,6 +50,18 @@
     text-align: center;
     color: aliceblue;
     padding: 1.3rem;
+  }
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #312c51 50%, #48426d 50%);
+    padding-top: 1.3rem;
+    padding-bottom: 1.8rem;
+  }
+  .result-header {
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 1.5rem 0;
   }
 }
 

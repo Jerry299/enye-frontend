@@ -1,0 +1,40 @@
+/* Small devices (landscape phones, 576px and up)  */
+@media only screen and (min-width: 220.98px) and (max-device-width: 767.97px) {
+}
+/* Medium devices (tablets, 768px and up)  */
+@media only screen and (min-width: 767.98px) and (max-device-width: 991.97px) {
+}
+
+/* Large devices (desktops, 992px and up)  */
+@media only screen and (min-width: 991.98px) and (max-device-width: 1199.97px) {
+}
+
+/* X-Large devices (large desktops, 1200px and up)  */
+@media only screen and (min-width: 1199.98px) and (max-device-width: 1399.97px) {
+  .dropdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dropdown-container h6 {
+  }
+  .select-group {
+    width: 70%;
+    background-color: #f5f4f4;
+    padding: 0.6em 1.4em 0.5em 0.8em;
+    border: 1px solid #aaa;
+    border-radius: 0.5em;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    outline: none;
+    font-weight: 600;
+  }
+  .select-group:hover {
+    background-color: #583d72;
+    color: #dddddd;
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up)  */
+@media (min-width: 1399.98px) {
+}
