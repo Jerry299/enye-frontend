@@ -12,6 +12,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [profilesPerPage, setProfilesPerPage] = useState(20);
   const [totalPages, setTotalPages] = useState(0);
+  const [genderFilter, setGenderFilter] = useState("ALL");
 
   const fetchProfiles = async () => {
     console.log("fetching data");
@@ -31,13 +32,29 @@ const Home = () => {
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  //handle changes in dropdown
+  const handleGenderChange = (e) => {
+    setGenderFilter(e.target.value);
+  };
+  console.log(profiles, "=== profiles");
+  // funtion to filter the profiles display when dropdown is changed
+
+  const filterProfiles = (gender) => {
+    let filteredProfile = [...profiles];
+    if (gender === "Female") {
+      return filteredProfile.filter((prof) => {
+        return prof.Gender === "Female";
+      });
+    }
+  };
+
+  console.log(filterProfiles("Male"));
 
   return (
     <div className="container-fluid home-container">
       <div className="row">
         <div className="col-sm-12">
           <h2 className="welcome-header">Welcome To Transaction Center.</h2>
-          <button onClick={fetchProfiles}>Fetch</button>
         </div>
         <div className="nav-row">
           <div className="col-sm-4">
@@ -47,6 +64,7 @@ const Home = () => {
             <Dropdown
               filteredBy={"Gender"}
               options={["ALL", "MALE", "FEMALE", "PREFER TO SKIP"]}
+              onGenderChange={handleGenderChange}
             />
           </div>
           <div className="col-sm-4">
@@ -59,17 +77,18 @@ const Home = () => {
           {loading ? (
             <Loading />
           ) : (
-            <Table
-              profiles={profiles}
-              profilesPerPage={profilesPerPage}
-              currentPage={currentPage}
-            />
+            <div>
+              <Pagination
+                totalPages={totalPages}
+                handlePagination={handlePagination}
+              />
+              <Table
+                profiles={filterProfiles}
+                profilesPerPage={profilesPerPage}
+                currentPage={currentPage}
+              />
+            </div>
           )}
-
-          <Pagination
-            totalPages={totalPages}
-            handlePagination={handlePagination}
-          />
         </div>
       </div>
     </div>

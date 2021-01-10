@@ -1,7 +1,7 @@
 import React from "react";
 import "./Dropdown.css";
 
-const Dropdown = ({ filteredBy, options }) => {
+const Dropdown = ({ filteredBy, options, onGenderChange }) => {
   return (
     <div className="container dropdown-container">
       <div>
@@ -10,7 +10,7 @@ const Dropdown = ({ filteredBy, options }) => {
           {filteredBy}
         </h6>
       </div>
-      <select className="select-group">
+      <select className="select-group" onChange={onGenderChange}>
         {options.map((option, i) => {
           return <option key={i}>{option}</option>;
         })}

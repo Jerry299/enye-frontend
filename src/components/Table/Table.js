@@ -4,7 +4,7 @@ import "./Table.css";
 const Table = ({ profiles, profilesPerPage, currentPage }) => {
   // to get a limited amount of profiles per page ,a little bit of maths is done
   const startIndex = (currentPage - 1) * profilesPerPage;
-  const selectedProfiles = profiles.slice(
+  const selectedProfiles = profiles("Female").slice(
     startIndex,
     startIndex + profilesPerPage
   );
@@ -40,7 +40,6 @@ const Table = ({ profiles, profilesPerPage, currentPage }) => {
             );
           })}
         </tbody>
-        <tfoot>List Of Transactions</tfoot>
       </table>
     </div>
   );
