@@ -1,26 +1,18 @@
 import React from "react";
 import "./Table.css";
 
-const Table = ({ profiles }) => {
-  // CreditCardNumber: "4335484786639577";
-  // CreditCardType: "VISA";
-  // DomainName: "lLHBvRf.com";
-  // Email: "jTcPkRF@WtwFiig.ru";
-  // FirstName: "Destany";
-  // Gender: "Male";
-  // LastLogin: "1985-11-15 19:49:13";
-  // LastName: "Schimmel";
-  // Latitude: -69.86103;
-  // Longitude: -173.23515;
-  // MacAddress: "78:9e:83:77:c9:e9";
-  // PaymentMethod: "money order";
-  // PhoneNumber: "351-062-8974";
-  // URL: "http://www.eLLmNhN.ru/";
-  // UserName: "NITESrS";
+const Table = ({ profiles, profilesPerPage, currentPage }) => {
+  // to get a limited amount of profiles per page ,a little bit of maths is done
+  const startIndex = (currentPage - 1) * profilesPerPage;
+  const selectedProfiles = profiles.slice(
+    startIndex,
+    startIndex + profilesPerPage
+  );
+
   return (
     <div className="table-responsive">
-      <table className="table table-hover table-bordered result-table">
-        <thead>
+      <table className="table table-hover result-table">
+        <thead className="table-dark">
           <tr>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
@@ -33,9 +25,9 @@ const Table = ({ profiles }) => {
           </tr>
         </thead>
         <tbody>
-          {profiles.map((profile) => {
+          {selectedProfiles.map((profile, i) => {
             return (
-              <tr key={profile.CreditCardNumber}>
+              <tr key={profile.CreditCardNumber} className="table-row">
                 <th scope="row">{profile.FirstName}</th>
                 <td> {profile.LastName} </td>
                 <td> {profile.Email} </td>
@@ -48,6 +40,7 @@ const Table = ({ profiles }) => {
             );
           })}
         </tbody>
+        <tfoot>List Of Transactions</tfoot>
       </table>
     </div>
   );

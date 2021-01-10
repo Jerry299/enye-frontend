@@ -3,49 +3,50 @@ import "./Home.css";
 import Dropdown from "../utilities/Dropdown";
 import SearchBox from "../utilities/SearchBox";
 import Table from "../Table/Table";
+import Pagination from "../Pagination/Pagination";
+import Loading from "../utilities/Loading";
 
 const Home = () => {
-  const [profiles, SetProfiles] = useState([]);
-  const [loading, SetLoading] = useState(false);
+  const [profiles, setProfiles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [profilesPerPage, setProfilesPerPage] = useState(20);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const fetchProfiles = async () => {
+    console.log("fetching data");
+    setLoading(true);
+    const res = await fetch("http://api.enye.tech/v1/challenge/records");
+    const data = await res.json();
+    setLoading(false);
+    setProfiles(data.records.profiles);
+    setTotalPages(Math.ceil(data.records.profiles.length / profilesPerPage));
+  };
 
   useEffect(() => {
-    fetch("http://api.enye.tech/v1/challenge/records")
-      .then((res) => res.json())
-      .then((data) => SetProfiles(data.records.profiles))
-      .catch((err) => console.log(err));
+    fetchProfiles();
   }, []);
 
-  console.log(profiles, "====profiles");
-  // CreditCardNumber: "4335484786639577";
-  // CreditCardType: "VISA";
-  // DomainName: "lLHBvRf.com";
-  // Email: "jTcPkRF@WtwFiig.ru";
-  // FirstName: "Destany";
-  // Gender: "Male";
-  // LastLogin: "1985-11-15 19:49:13";
-  // LastName: "Schimmel";
-  // Latitude: -69.86103;
-  // Longitude: -173.23515;
-  // MacAddress: "78:9e:83:77:c9:e9";
-  // PaymentMethod: "money order";
-  // PhoneNumber: "351-062-8974";
-  // URL: "http://www.eLLmNhN.ru/";
-  // UserName: "NITESrS";
+  //paginate function, change page
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className="container-fluid home-container">
       <div className="row">
         <div className="col-sm-12">
           <h2 className="welcome-header">Welcome To Transaction Center.</h2>
+          <button onClick={fetchProfiles}>Fetch</button>
         </div>
         <div className="nav-row">
           <div className="col-sm-4">
-            <Dropdown filteredBy={"Credit Card Type"} options={["VISA"]} />
+            <Dropdown filteredBy={"Credit Card Type"} options={["JCB"]} />
           </div>
           <div className="col-sm-4">
             <Dropdown
               filteredBy={"Gender"}
-              options={["MALE", "FEMALE", "PREFER TO SKIP"]}
+              options={["ALL", "MALE", "FEMALE", "PREFER TO SKIP"]}
             />
           </div>
           <div className="col-sm-4">
@@ -55,7 +56,20 @@ const Home = () => {
         <h2 className="result-header">All Transactions.</h2>
         <hr />
         <div className="result-body container">
-          <Table profiles={profiles} />
+          {loading ? (
+            <Loading />
+          ) : (
+            <Table
+              profiles={profiles}
+              profilesPerPage={profilesPerPage}
+              currentPage={currentPage}
+            />
+          )}
+
+          <Pagination
+            totalPages={totalPages}
+            handlePagination={handlePagination}
+          />
         </div>
       </div>
     </div>
