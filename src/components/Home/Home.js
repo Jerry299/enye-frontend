@@ -12,7 +12,8 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [profilesPerPage, setProfilesPerPage] = useState(20);
   const [totalPages, setTotalPages] = useState(0);
-  const [genderFilter, setGenderFilter] = useState("ALL");
+  const [genderFilter, setGenderFilter] = useState("All");
+  const [searchField, setSearchField] = useState("");
 
   const fetchProfiles = async () => {
     console.log("fetching data");
@@ -26,7 +27,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchProfiles();
-  }, []);
+  }, [genderFilter]);
 
   //paginate function, change page
   const handlePagination = (pageNumber) => {
@@ -36,39 +37,46 @@ const Home = () => {
   const handleGenderChange = (e) => {
     setGenderFilter(e.target.value);
   };
-  console.log(profiles, "=== profiles");
+
   // funtion to filter the profiles display when dropdown is changed
 
   const filterProfiles = (gender) => {
-    let filteredProfile = [...profiles];
-    if (gender === "Female") {
-      return filteredProfile.filter((prof) => {
-        return prof.Gender === "Female";
-      });
+    if (gender === "All") {
+      return profiles.map((profile) => profile);
     }
+    return profiles.filter((profile) => {
+      return profile.Gender === gender;
+    });
+  };
+  const handleSearchChange = (e) => {
+    setSearchField(e.target.value);
   };
 
-  console.log(filterProfiles("Male"));
+  const filterBySearch = () => {
+    return profiles.filter((prof) => {
+      return prof.UserName.includes(searchField.toLowerCase());
+    });
+  };
 
   return (
     <div className="container-fluid home-container">
       <div className="row">
         <div className="col-sm-12">
-          <h2 className="welcome-header">Welcome To Transaction Center.</h2>
+          <h2 className="welcome-header">Welcome To Transactions Center.</h2>
         </div>
         <div className="nav-row">
-          <div className="col-sm-4">
-            <Dropdown filteredBy={"Credit Card Type"} options={["JCB"]} />
-          </div>
-          <div className="col-sm-4">
+          <div className="col-sm-4 navigation-item">
             <Dropdown
               filteredBy={"Gender"}
-              options={["ALL", "MALE", "FEMALE", "PREFER TO SKIP"]}
+              options={["All", "Male", "Female", "Prefer to skip"]}
               onGenderChange={handleGenderChange}
             />
           </div>
-          <div className="col-sm-4">
-            <SearchBox />
+          <div className="col-sm-4 navigation-item">
+            <SearchBox handleSearchChange={handleSearchChange} />
+          </div>
+          <div className="col-sm-4 navigation-item">
+            <Dropdown filteredBy={"Credit Card Type"} options={["JCB"]} />
           </div>
         </div>
         <h2 className="result-header">All Transactions.</h2>
@@ -83,9 +91,10 @@ const Home = () => {
                 handlePagination={handlePagination}
               />
               <Table
-                profiles={filterProfiles}
+                profiles={filterProfiles && filterBySearch}
                 profilesPerPage={profilesPerPage}
                 currentPage={currentPage}
+                genderFilter={genderFilter}
               />
             </div>
           )}

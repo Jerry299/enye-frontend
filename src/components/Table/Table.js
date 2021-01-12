@@ -1,10 +1,10 @@
 import React from "react";
 import "./Table.css";
 
-const Table = ({ profiles, profilesPerPage, currentPage }) => {
+const Table = ({ profiles, profilesPerPage, currentPage, genderFilter }) => {
   // to get a limited amount of profiles per page ,a little bit of maths is done
   const startIndex = (currentPage - 1) * profilesPerPage;
-  const selectedProfiles = profiles("Female").slice(
+  const selectedProfiles = profiles(genderFilter).slice(
     startIndex,
     startIndex + profilesPerPage
   );

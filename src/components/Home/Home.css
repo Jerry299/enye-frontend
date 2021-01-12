@@ -19,44 +19,57 @@
     -webkit-backdrop-filter: blur(5px);
 } */
 
+/* generic css */
+.home-container {
+  margin-bottom: 6rem;
+  padding-bottom: 3rem;
+  max-height: 100%;
+  width: 90vw;
+  background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease-in-out infinite;
+  border-radius: 4px;
+  font-family: "Noto Sans JP", sans-serif;
+}
+.welcome-header {
+  text-align: center;
+  color: aliceblue;
+  padding: 1.3rem;
+}
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #312c51 50%, #48426d 50%);
+  padding-top: 1.3rem;
+  padding-bottom: 1.8rem;
+}
+.result-header {
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 3.5rem 0;
+}
+.result-body {
+  padding: 4rem;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media only screen and (min-width: 220.98px) and (max-device-width: 767.97px) {
-  .home-container {
-    background-color: red;
+  .nav-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav-row .navigation-item {
+    margin: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media only screen and (min-width: 767.98px) and (max-device-width: 991.97px) {
-  .home-container {
-    background-color: green;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media only screen and (min-width: 991.98px) and (max-device-width: 1199.97px) {
-  .home-container {
-  }
-}
-
-/* X-Large devices (large desktops, 1200px and up) */
-@media only screen and (min-width: 1199.98px) and (max-device-width: 1399.97px) {
-  .home-container {
-    margin-bottom: 6rem;
-    padding-bottom: 3rem;
-    max-height: 100%;
-    width: 90vw;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    border-radius: 4px;
-    font-family: "Noto Sans JP", sans-serif;
-  }
-  .welcome-header {
-    text-align: center;
-    color: aliceblue;
-    padding: 1.3rem;
-  }
   .nav-row {
     display: flex;
     justify-content: space-between;
@@ -64,20 +77,38 @@
     padding-top: 1.3rem;
     padding-bottom: 1.8rem;
   }
-  .result-header {
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 3.5rem 0;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media only screen and (min-width: 991.98px) and (max-device-width: 1199.97px) {
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #312c51 50%, #48426d 50%);
+    padding-top: 1.3rem;
+    padding-bottom: 1.8rem;
   }
-  .result-body {
-    padding: 4rem;
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1199.98px) and (max-device-width: 1399.97px) {
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #312c51 50%, #48426d 50%);
+    padding-top: 1.3rem;
+    padding-bottom: 1.8rem;
   }
 }
 
 /* XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1399.98px) {
-  .home-container {
-    background-color: rgb(247, 3, 153);
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #312c51 50%, #48426d 50%);
+    padding-top: 1.3rem;
+    padding-bottom: 1.8rem;
   }
 }
 

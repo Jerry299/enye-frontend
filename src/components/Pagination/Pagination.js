@@ -4,7 +4,7 @@ import "./Pagination.css";
 const Pagination = ({ totalPages, handlePagination }) => {
   // create an array for page numbers
   const pages = [...Array(totalPages).keys()].map((number) => number + 1);
-  // console.log(pages, "pages");
+  //console.log(pages, "pages", totalPages, "totalPages");
 
   return (
     <nav aria-label="Page navigation example">
