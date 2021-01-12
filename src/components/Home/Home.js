@@ -16,7 +16,6 @@ const Home = () => {
   const [searchField, setSearchField] = useState("");
 
   const fetchProfiles = async () => {
-    console.log("fetching data");
     setLoading(true);
     const res = await fetch("http://api.enye.tech/v1/challenge/records");
     const data = await res.json();
