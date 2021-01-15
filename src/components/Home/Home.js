@@ -8,25 +8,24 @@ import Loading from "../utilities/Loading";
 
 const Home = () => {
   const [profiles, setProfiles] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [profilesPerPage, setProfilesPerPage] = useState(20);
+  const [profilesPerPage] = useState(20);
   const [totalPages, setTotalPages] = useState(0);
   const [genderFilter, setGenderFilter] = useState("All");
   const [searchField, setSearchField] = useState("");
 
-  const fetchProfiles = async () => {
-    setLoading(true);
-    const res = await fetch("http://api.enye.tech/v1/challenge/records");
-    const data = await res.json();
-    setLoading(false);
-    setProfiles(data.records.profiles);
-    setTotalPages(Math.ceil(data.records.profiles.length / profilesPerPage));
-  };
-
   useEffect(() => {
+    const fetchProfiles = async () => {
+      setLoading(true);
+      const res = await fetch("http://api.enye.tech/v1/challenge/records");
+      const data = await res.json();
+      setLoading(false);
+      setProfiles(data.records.profiles);
+      setTotalPages(Math.ceil(data.records.profiles.length / profilesPerPage));
+    };
     fetchProfiles();
-  }, [genderFilter]);
+  }, [genderFilter, profilesPerPage]);
 
   //paginate function, change page
   const handlePagination = (pageNumber) => {
@@ -52,8 +51,9 @@ const Home = () => {
   };
 
   const filterBySearch = () => {
-    return profiles.filter((prof) => {
-      return prof.UserName.includes(searchField.toLowerCase());
+    // we can now search the result of filterProfiles function which return an array
+    return filterProfiles(genderFilter).filter((prof) => {
+      return prof.UserName.includes(searchField);
     });
   };
 
@@ -90,10 +90,13 @@ const Home = () => {
                 handlePagination={handlePagination}
               />
               <Table
-                profiles={filterProfiles && filterBySearch}
+                // profiles={filterProfiles}
+                // filterBySearch={filterBySearch}
+                profiles={filterBySearch}
                 profilesPerPage={profilesPerPage}
                 currentPage={currentPage}
                 genderFilter={genderFilter}
+                searchField={searchField}
               />
             </div>
           )}
